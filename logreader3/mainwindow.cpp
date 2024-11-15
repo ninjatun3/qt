@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupEditor();
     setupFileMenu();
     setCentralWidget(editor);
-    setWindowTitle(tr("Тестовое задание №2 Сурков К."));
+    setWindowTitle(tr("Log reader"));
     rd = new Reader();
 
     // соединения:
