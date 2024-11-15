@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     highlighter.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    reader.cpp
 
 HEADERS += \
     highlighter.h \
-    mainwindow.h
+    mainwindow.h \
+    reader.h
 
 FORMS += \
     mainwindow.ui

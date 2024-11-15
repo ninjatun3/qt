@@ -1,7 +1,10 @@
+// класс главного окна
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include "highlighter.h"
+#include "reader.h"
 
 #include <QMainWindow>
 #include <QSyntaxHighlighter>
@@ -22,24 +25,25 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    QString filename;
+    QString filename; // имя открываемого файла
 
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 public slots:
-    void newFile();
-    void openFile(const QString &path = QString());
-    void readFile(const QString& line);
-    void showData(const QString& line);
+    void openFile(const QString &path = QString()); // открыть диалог выбора файла
+    void showData(const QString& line); // отобразить файл, полученный из класса чтения
+
+signals:
+    void sendFilename(const QString&); // передать имя файла в класс чтения
 
 private:
     Ui::MainWindow *ui;
 
+    void setupEditor(); // применить правила подсветки для текстовой области
+    void setupFileMenu(); // верхнее меню окна
 
-    void setupEditor();
-    void setupFileMenu();
-
+    Reader *rd;
     QTextEdit *editor;
     Highlighter *highlighter;
 };

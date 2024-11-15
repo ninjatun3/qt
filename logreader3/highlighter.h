@@ -1,37 +1,43 @@
+// класс подсветки синтаксиса
+
 #ifndef HIGHLIGHTER_H
 #define HIGHLIGHTER_H
 
 #include <QObject>
 #include <QSyntaxHighlighter>
 #include <QRegularExpression>
+#include <QDebug>
 
 class Highlighter : public QSyntaxHighlighter
 {
     Q_OBJECT
 
 public:
-    Highlighter(QTextDocument *parent = 0);
+    Highlighter(QTextDocument *parent = nullptr);
 
 protected:
-    void highlightBlock(const QString &text) override;
+    void highlightBlock(const QString &text) override; // функция подсветки блока текста
 
 private:
-    struct HighlightingRule
+    struct HighlightingRule // правило подсветки
     {
-        QRegularExpression pattern;
-        QTextCharFormat format;
+        QRegularExpression pattern; // маска подсветки
+        QTextCharFormat format; // формат подсветки
     };
-    QVector<HighlightingRule> highlightingRules;
+    QList<HighlightingRule> highlightingRules; // перечень правил подсветки
 
-    QRegularExpression commentStartExpression;
-    QRegularExpression commentEndExpression;
+    QRegularExpression messageStart; // разметка блока текста сообщения
+    QRegularExpression messageEnd; // разметка блока текста сообщения
+    QTextCharFormat multiLineMessage; // блок текста
 
-    QTextCharFormat keywordFormat;
-    QTextCharFormat classFormat;
-    QTextCharFormat singleLineCommentFormat;
-    QTextCharFormat multiLineCommentFormat;
-    QTextCharFormat quotationFormat;
-    QTextCharFormat functionFormat;
+    QTextCharFormat date; // дата
+    QTextCharFormat inf; // информация
+    QTextCharFormat txt; // текст
+    QTextCharFormat dbg; // отладочные сведения
+    QTextCharFormat wrn; // предупреждение
+    QTextCharFormat err; // ошибка
+    QTextCharFormat input; // входящие данные
+    QTextCharFormat output; // исходящие данные
 };
 
 #endif // HIGHLIGHTER_H
